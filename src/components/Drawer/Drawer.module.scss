@@ -1,0 +1,90 @@
+.overlay {
+  position: absolute;
+  right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.drawer {
+  position: absolute;
+  right: 0;
+  padding: 30px;
+  width: 385px;
+  height: 100%;
+  box-shadow: -10px 4px 24px 0px rgba(0, 0, 0, 0.1);
+  background: #fff;
+
+  h2 {
+    margin: 0;
+  }
+
+  .list {
+    row-gap: 20px;
+    margin-bottom: 20px;
+    flex: 1;
+    overflow: auto;
+  }
+}
+
+.cart__item {
+  padding: 20px;
+  border: 1px solid #f3f3f3;
+  border-radius: 20px;
+
+  span {
+    font-size: 14px;
+  }
+
+  b {
+    font-size: 14px;
+  }
+}
+
+.remove-btn {
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.cart__total {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+
+  ul {
+    row-gap: 20px;
+
+    div {
+      position: relative;
+      top: -4px;
+      margin: 0 10px;
+      flex: 1;
+      height: 1px;
+      border-bottom: 1px dashed #dfdfdf;
+    }
+  }
+
+  button {
+    position: relative;
+
+    &:hover {
+      img {
+        transform: translateX(7px);
+      }
+    }
+
+    img {
+      position: absolute;
+      right: 30px;
+      top: 20px;
+      transition: transform 0.2s ease-in-out;
+    }
+  }
+}

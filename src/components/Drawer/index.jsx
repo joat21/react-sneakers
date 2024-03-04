@@ -1,29 +1,31 @@
+import styles from "./Drawer.module.scss";
+
 const Drawer = () => {
   return (
-    <div style={{ display: 'none' }} className="overlay">
-      <div className="drawer d-flex flex-column">
+    <div style={{ display: 'none' }} className={styles.overlay}>
+      <div className={`${styles.drawer} d-flex flex-column`}>
         <h2 className='d-flex justify-between mb-30'>
-          Корзина <img className='remove-btn' src="./src/assets/img/btn-remove.svg" alt="remove" />
+          Корзина <img className={styles['remove-btn']} src="./src/assets/img/btn-remove.svg" alt="remove" />
         </h2>
-        <ul className='list d-flex flex-column'>
-          <li className="cart__item d-flex align-center">
+        <ul className={`${styles.list} d-flex flex-column`}>
+          <li className={`${styles['cart__item']} d-flex align-center`}>
             <img className='mr-20' width={70} height={70} src="./src/assets/img/sneakers/1.jpeg" alt="sneakers" />
             <div className='d-flex flex-column mr-10'>
               <span className='mb-5'>Мужские Кроссовки Nike Air Max 270</span>
               <b>12 999 руб.</b>
             </div>
-            <img className='remove-btn' src="./src/assets/img/btn-remove.svg" alt="remove" />
+            <img className={styles['remove-btn']} src="./src/assets/img/btn-remove.svg" alt="remove" />
           </li>
-          <li className="cart__item d-flex align-center">
+          <li className={`${styles['cart__item']} d-flex align-center`}>
             <img className='mr-20' width={70} height={70} src="./src/assets/img/sneakers/2.jpeg" alt="sneakers" />
             <div className='d-flex flex-column mr-10'>
               <span className='mb-5'>Мужские Кроссовки Nike Air Max 270</span>
               <b>12 999 руб.</b>
             </div>
-            <img className='remove-btn' src="./src/assets/img/btn-remove.svg" alt="remove" />
+            <img className={styles['remove-btn']} src="./src/assets/img/btn-remove.svg" alt="remove" />
           </li>
         </ul>
-        <div className="cart__total">
+        <div className={styles['cart__total']}>
           <ul className='d-flex flex-column'>
             <li className='d-flex justify-between align-end'>
               <span>Итого:</span>
