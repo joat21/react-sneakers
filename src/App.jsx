@@ -1,6 +1,7 @@
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 import Card from './components/Card';
+import { useState } from 'react';
 
 const sneakers = [
   {
@@ -26,10 +27,13 @@ const sneakers = [
 ];
 
 function App() {
+
+  const [isCartOpened, setIsCartOpened] = useState(false);
+
   return (
     <div className="wrapper clear">
-      <Drawer />
-      <Header />
+      {isCartOpened && <Drawer onClose={() => setIsCartOpened(false)} />}
+      <Header onCartClick={() => setIsCartOpened(true)} />
       <div className="content p-40">
         <div className='d-flex justify-between align-center mb-40'>
           <h1>

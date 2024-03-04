@@ -1,7 +1,7 @@
 import logo from "./../../assets/img/logo.svg";
 import styles from "./Header.module.scss";
 
-const Header = () => {
+const Header = (props) => {
   return (
     <header className={`${styles.header} d-flex align-center justify-between p-40`}>
       <div className={`${styles['header__left']} d-flex align-center`}>
@@ -12,7 +12,7 @@ const Header = () => {
         </div>
       </div>
       <ul className={`${styles['header__right']} d-flex`}>
-        <li>
+        <li onClick={props.onCartClick} className="cu-p">
           <svg width="20.000000" height="19.181816" viewBox="0 0 20 19.1818" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
             <path id="Vector" d="M7.54547 18.1818C7.09363 18.1818 6.72729 17.8155 6.72729 17.3636C6.72729 16.9118 7.09363 16.5455 7.54547 16.5455C7.99738 16.5455 8.36365 16.9118 8.36365 17.3636C8.36365 17.8155 7.99738 18.1818 7.54547 18.1818Z" stroke="#9B9B9B" stroke-opacity="1.000000" stroke-width="2.000000" stroke-linejoin="round" />
             <path id="Vector" d="M16.5455 18.1818C16.0936 18.1818 15.7273 17.8155 15.7273 17.3636C15.7273 16.9118 16.0936 16.5455 16.5455 16.5455C16.9974 16.5455 17.3636 16.9118 17.3636 17.3636C17.3636 17.8155 16.9974 18.1818 16.5455 18.1818Z" stroke="#9B9B9B" stroke-opacity="1.000000" stroke-width="2.000000" stroke-linejoin="round" />

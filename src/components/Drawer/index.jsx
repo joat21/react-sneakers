@@ -1,11 +1,11 @@
 import styles from "./Drawer.module.scss";
 
-const Drawer = () => {
+const Drawer = (props) => {
   return (
-    <div style={{ display: 'none' }} className={styles.overlay}>
+    <div className={styles.overlay}>
       <div className={`${styles.drawer} d-flex flex-column`}>
         <h2 className='d-flex justify-between mb-30'>
-          Корзина <img className={styles['remove-btn']} src="./src/assets/img/btn-remove.svg" alt="remove" />
+          Корзина <img className={styles['remove-btn']} onClick={props.onClose} src="./src/assets/img/btn-remove.svg" alt="close" />
         </h2>
         <ul className={`${styles.list} d-flex flex-column`}>
           <li className={`${styles['cart__item']} d-flex align-center`}>
