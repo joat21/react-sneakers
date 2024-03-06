@@ -1,8 +1,9 @@
 import { useState } from "react";
 import styles from "./Card.module.scss";
 
-const Card = ({ id, title, imageUrl, price, onAdd }) => {
+const Card = ({ product, onAdd }) => {
 
+  const { id, title, imageUrl, price } = product;
   const [isAdded, setIsAdded] = useState(false);
 
   const onClickAdd = () => {

@@ -34,12 +34,27 @@ body {
   padding: 0 15px;
   border: 1px solid #f3f3f3;
   border-radius: 10px;
+  width: 280px;
 
   input {
     padding: 13px;
     width: 200px;
     border: none;
     font-size: 16px;
+  }
+
+  .remove-btn {
+    justify-self: flex-end;
+  }
+}
+
+.remove-btn {
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.2s ease-in-out;
+
+  &:hover {
+    opacity: 1;
   }
 }
 

@@ -8,6 +8,7 @@ function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [isCartOpened, setIsCartOpened] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
     fetch('https://65e758b553d564627a8e990a.mockapi.io/items')
@@ -29,6 +30,9 @@ function App() {
     setCartItems(prev => [...prev, item]);
   }
 
+  const filteredItems = items
+  .filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()));
+
   return (
     <div className="wrapper clear">
       {isCartOpened && <Drawer items={cartItems} onClose={() => setIsCartOpened(false)} />}
@@ -40,20 +44,19 @@ function App() {
           </h1>
           <div className="search-block d-flex align-center">
             <img src="./src/assets/img/search.svg" alt="search" />
-            <input type="text" placeholder='Поиск...' />
+            <input onChange={(e) => setSearchValue(e.target.value)} value={searchValue} type="text" placeholder='Поиск...' />
+            {searchValue && <img className='remove-btn' onClick={() => setSearchValue('')} src="./src/assets/img/btn-remove.svg" alt="clear" />}
           </div>
         </div>
         <ul className="d-flex flex-wrap">
-          {items.map(item => (
-            <Card
-              key={item.id}
-              id={item.id}
-              title={item.title}
-              imageUrl={item.imageUrl}
-              price={item.price}
-              onAdd={onAddToCart}
-            />
-          ))}
+          {console.log(filteredItems) || filteredItems.length > 0 ? filteredItems
+            .map(item => (
+              <Card
+                key={item.id}
+                product={item}
+                onAdd={onAddToCart}
+              />
+            )) : <span>{`По вашему запросу "${searchValue}" ничего не найдено`}</span>}
         </ul>
       </div>
     </div>

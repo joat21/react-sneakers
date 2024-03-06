@@ -1,7 +1,9 @@
 import styles from "./Drawer.module.scss";
 
 const Drawer = ({ onClose, items = [] }) => {
+
   const totalPrice = items.map(item => item.price).reduce((price1, price2) => price1 + price2, 0);
+
   return (
     <div className={styles.overlay}>
       <div className={`${styles.drawer} d-flex flex-column`}>
