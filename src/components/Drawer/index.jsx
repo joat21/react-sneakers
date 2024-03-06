@@ -1,6 +1,7 @@
 import styles from "./Drawer.module.scss";
 
 const Drawer = ({ onClose, items = [] }) => {
+  const totalPrice = items.map(item => item.price).reduce((price1, price2) => price1 + price2, 0);
   return (
     <div className={styles.overlay}>
       <div className={`${styles.drawer} d-flex flex-column`}>
@@ -24,12 +25,12 @@ const Drawer = ({ onClose, items = [] }) => {
             <li className='d-flex justify-between align-end'>
               <span>Итого:</span>
               <div></div>
-              <b>21 498 руб.</b>
+              <b>{totalPrice} руб.</b>
             </li>
             <li className='d-flex justify-between align-end'>
               <span>Налог 5%:</span>
               <div></div>
-              <b>1074 руб.</b>
+              <b>{(totalPrice * 0.05).toFixed(2)} руб.</b>
             </li>
           </ul>
           <button className='btn'>
