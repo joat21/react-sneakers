@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 function App() {
 
   const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([]);
   const [isCartOpened, setIsCartOpened] = useState(false);
 
   useEffect(() => {
@@ -14,9 +15,23 @@ function App() {
       .then(data => setItems(data));
   }, []);
 
+  const onAddToCart = (item, isAdded) => {
+    if (isAdded) {
+
+      const tempArray = cartItems.filter((cartItem) => (
+        cartItem.id !== item.id
+      ));
+
+      setCartItems(prev => tempArray);
+      return;
+    }
+
+    setCartItems(prev => [...prev, item]);
+  }
+
   return (
     <div className="wrapper clear">
-      {isCartOpened && <Drawer onClose={() => setIsCartOpened(false)} />}
+      {isCartOpened && <Drawer items={cartItems} onClose={() => setIsCartOpened(false)} />}
       <Header onCartClick={() => setIsCartOpened(true)} />
       <div className="content p-40">
         <div className='d-flex justify-between align-center mb-40'>
@@ -29,11 +44,13 @@ function App() {
           </div>
         </div>
         <ul className="d-flex flex-wrap">
-          {items.map(obj => (
+          {items.map(item => (
             <Card
-              title={obj.title}
-              imageUrl={obj.imageUrl}
-              price={obj.price}
+              key={item.id}
+              title={item.title}
+              imageUrl={item.imageUrl}
+              price={item.price}
+              onAdd={onAddToCart}
             />
           ))}
         </ul>
