@@ -1,7 +1,8 @@
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 import Header from './components/Header';
 import Drawer from './components/Drawer';
 import Card from './components/Card';
-import { useEffect, useState } from 'react';
 
 function App() {
 
@@ -11,19 +12,16 @@ function App() {
   const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
-    fetch('https://65e758b553d564627a8e990a.mockapi.io/items')
-      .then(res => res.json())
-      .then(data => setItems(data));
+    axios.get('https://65e758b553d564627a8e990a.mockapi.io/items')
+      .then(res => setItems(res.data));
   }, []);
 
   const onAddToCart = (item, isAdded) => {
     if (isAdded) {
-
-      const tempArray = cartItems.filter((cartItem) => (
+      setCartItems(prev => cartItems.filter((cartItem) => (
         cartItem.id !== item.id
-      ));
+      )));
 
-      setCartItems(prev => tempArray);
       return;
     }
 
@@ -31,7 +29,7 @@ function App() {
   }
 
   const filteredItems = items
-  .filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()));
+    .filter(item => item.title.toLowerCase().includes(searchValue.toLowerCase()));
 
   return (
     <div className="wrapper clear">
@@ -49,14 +47,14 @@ function App() {
           </div>
         </div>
         <ul className="d-flex flex-wrap">
-          {console.log(filteredItems) || filteredItems.length > 0 ? filteredItems
+          {filteredItems.length > 0 ? filteredItems
             .map(item => (
               <Card
                 key={item.id}
                 product={item}
                 onAdd={onAddToCart}
               />
-            )) : <span>{`По вашему запросу "${searchValue}" ничего не найдено`}</span>}
+            )) : <span>{`По запросу "${searchValue}" ничего не найдено`}</span>}
         </ul>
       </div>
     </div>
