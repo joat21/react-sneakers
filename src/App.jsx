@@ -57,7 +57,7 @@ function App() {
         <ul className="d-flex flex-wrap">
           {
             filteredItems.length > 0 ? filteredItems
-              .map(item => console.log(item) || (
+              .map(item => (
                 <Card
                   key={item.ID}
                   product={item}

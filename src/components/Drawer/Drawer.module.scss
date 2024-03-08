@@ -88,3 +88,39 @@
     }
   }
 }
+
+.cart_empty {
+  text-align: center;
+
+  h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 27px
+  }
+
+  p {
+    margin: 0;
+    margin-bottom: 40px;
+  }
+
+  button {
+    position: relative;
+    max-width: 245px;
+
+    &:hover {
+      img {
+        transform: rotate(180deg) translateX(7px);
+      }
+    }
+
+    img {
+      position: absolute;
+      left: 30px;
+      top: 20px;
+      transform: rotate(180deg);
+      transition: transform 0.2s ease-in-out;
+    }
+  }
+}
