@@ -1,14 +1,14 @@
 import { useState } from "react";
 import styles from "./Card.module.scss";
 
-const Card = ({ product, onAdd }) => {
+const Card = ({ product, onAdd, isInCart }) => {
 
-  const { id, title, imageUrl, price } = product;
-  const [isAdded, setIsAdded] = useState(false);
+  const { ID, title, imageUrl, price } = product;
+  const [isAdded, setIsAdded] = useState(isInCart);
 
   const onClickAdd = () => {
-    onAdd({ id, title, imageUrl, price }, isAdded);
-    setIsAdded(!isAdded);
+    onAdd({ ID, title, imageUrl, price }, isAdded);
+    setIsAdded(true);
   }
 
   return (

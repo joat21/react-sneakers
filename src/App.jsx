@@ -14,18 +14,26 @@ function App() {
   useEffect(() => {
     axios.get('https://65e758b553d564627a8e990a.mockapi.io/items')
       .then(res => setItems(res.data));
+    axios.get('https://65e758b553d564627a8e990a.mockapi.io/cart')
+      .then(res => setCartItems(res.data));
   }, []);
 
   const onAddToCart = (item, isAdded) => {
     if (isAdded) {
-      setCartItems(prev => cartItems.filter((cartItem) => (
-        cartItem.id !== item.id
-      )));
-
+      setIsCartOpened(true);
       return;
     }
 
+    axios.post('https://65e758b553d564627a8e990a.mockapi.io/cart', item);
     setCartItems(prev => [...prev, item]);
+  }
+
+  const onRemoveFromCart = (id) => {
+    const itemIDToRemove = cartItems.find(item => item.ID === id).id;
+    axios.delete(`https://65e758b553d564627a8e990a.mockapi.io/cart/${itemIDToRemove}`);
+    setCartItems(prev => cartItems.filter((cartItem) => (
+      cartItem.ID !== id
+    )));
   }
 
   const filteredItems = items
@@ -33,7 +41,7 @@ function App() {
 
   return (
     <div className="wrapper clear">
-      {isCartOpened && <Drawer items={cartItems} onClose={() => setIsCartOpened(false)} />}
+      {isCartOpened && <Drawer items={cartItems} onRemove={onRemoveFromCart} onClose={() => setIsCartOpened(false)} />}
       <Header onCartClick={() => setIsCartOpened(true)} />
       <div className="content p-40">
         <div className='d-flex justify-between align-center mb-40'>
@@ -47,14 +55,17 @@ function App() {
           </div>
         </div>
         <ul className="d-flex flex-wrap">
-          {filteredItems.length > 0 ? filteredItems
-            .map(item => (
-              <Card
-                key={item.id}
-                product={item}
-                onAdd={onAddToCart}
-              />
-            )) : <span>{`По запросу "${searchValue}" ничего не найдено`}</span>}
+          {
+            filteredItems.length > 0 ? filteredItems
+              .map(item => console.log(item) || (
+                <Card
+                  key={item.ID}
+                  product={item}
+                  isInCart={cartItems.map(item => item.ID).includes(item.ID)}
+                  onAdd={onAddToCart}
+                />
+              )) : <span>{`По запросу "${searchValue}" ничего не найдено`}</span>
+          }
         </ul>
       </div>
     </div>
