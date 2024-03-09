@@ -3,11 +3,11 @@ import styles from "./Card.module.scss";
 
 const Card = ({ product, onAdd, isInCart }) => {
 
-  const { ID, title, imageUrl, price } = product;
+  const { id, title, imageUrl, price } = product;
   const [isAdded, setIsAdded] = useState(isInCart);
 
   const onClickAdd = () => {
-    onAdd({ ID, title, imageUrl, price }, isAdded);
+    onAdd({ id, title, imageUrl, price }, isAdded);
     setIsAdded(true);
   }
 

@@ -24,16 +24,13 @@ function App() {
       return;
     }
 
-    axios.post('https://65e758b553d564627a8e990a.mockapi.io/cart', item);
-    setCartItems(prev => [...prev, item]);
+    axios.post('https://65e758b553d564627a8e990a.mockapi.io/cart', item)
+      .then((res) => setCartItems(prev => [...prev, res.data]));
   }
 
   const onRemoveFromCart = (id) => {
-    const itemIDToRemove = cartItems.find(item => item.ID === id).id;
-    axios.delete(`https://65e758b553d564627a8e990a.mockapi.io/cart/${itemIDToRemove}`);
-    setCartItems(prev => cartItems.filter((cartItem) => (
-      cartItem.ID !== id
-    )));
+    axios.delete(`https://65e758b553d564627a8e990a.mockapi.io/cart/${id}`);
+    setCartItems(prev => prev.filter((item) => (item.id !== id)));
   }
 
   const filteredItems = items
@@ -59,9 +56,9 @@ function App() {
             filteredItems.length > 0 ? filteredItems
               .map(item => (
                 <Card
-                  key={item.ID}
+                  key={item.id}
                   product={item}
-                  isInCart={cartItems.map(item => item.ID).includes(item.ID)}
+                  isInCart={cartItems.map(item => item.id).includes(item.id)}
                   onAdd={onAddToCart}
                 />
               )) : <span>{`По запросу "${searchValue}" ничего не найдено`}</span>

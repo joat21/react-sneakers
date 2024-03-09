@@ -14,13 +14,13 @@ const Drawer = ({ onClose, onRemove, items = [] }) => {
           <>
             <ul className={`${styles.list} d-flex flex-column`}>
               {items.map(item => (
-                <li key={item.ID} className={`${styles['cart__item']} d-flex align-center`}>
+                <li key={item.id} className={`${styles['cart__item']} d-flex align-center`}>
                   <img className='mr-20' width={70} height={70} src={item.imageUrl} alt="sneakers" />
                   <div className='d-flex flex-column mr-10'>
                     <span className='mb-5'>{item.title}</span>
                     <b>{item.price} руб.</b>
                   </div>
-                  <img onClick={() => onRemove(item.ID)} className={styles['remove-btn']} src="./src/assets/img/btn-remove.svg" alt="remove" />
+                  <img onClick={() => onRemove(item.id)} className={styles['remove-btn']} src="./src/assets/img/btn-remove.svg" alt="remove" />
                 </li>
               ))}
             </ul>
