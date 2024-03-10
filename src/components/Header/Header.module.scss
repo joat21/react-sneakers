@@ -19,7 +19,8 @@
   .header__right {
     column-gap: 32px;
 
-    li {
+    li,
+    :link {
       display: flex;
       align-items: center;
       justify-content: center;

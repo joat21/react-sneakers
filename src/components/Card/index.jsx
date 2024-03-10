@@ -1,19 +1,29 @@
 import { useState } from "react";
 import styles from "./Card.module.scss";
 
-const Card = ({ product, onAdd, isInCart }) => {
+const Card = ({ id, title, imageUrl, price, onAdd, onFavorite, isInCart, isInFavorites = false }) => {
 
-  const { id, title, imageUrl, price } = product;
   const [isAdded, setIsAdded] = useState(isInCart);
+  const [isFavorited, setIsFavorited] = useState(isInFavorites);
 
   const onClickAdd = () => {
     onAdd({ id, title, imageUrl, price }, isAdded);
     setIsAdded(true);
   }
 
+  const onClickFavorite = () => {
+    onFavorite({ id, title, imageUrl, price }, isFavorited);
+    setIsFavorited(!isFavorited);
+  }
+
   return (
     <div className={`${styles.card} d-flex flex-column`}>
-      <img width={32} height={32} className={styles.favorite} src="./src/assets/img/heart-unliked.svg" alt="unliked" />
+      <img
+        className={styles.favorite}
+        src={isFavorited ? "./src/assets/img/liked.svg" : "./src/assets/img/unliked.svg"}
+        alt={isFavorited ? 'liked' : 'unliked'}
+        onClick={onClickFavorite}
+      />
       <img width={133} height={112} src={imageUrl} alt="" />
       <h5>{title}</h5>
       <div className='d-flex justify-between align-center'>
